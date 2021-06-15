@@ -23,13 +23,37 @@ import './App.css';
 //   );
 // }
 
-// Komponen - Properties
-function Biodata(props){
-  return <span>umurnya {props.age}</span>
-}
+// State
+class Timer extends Component{
+  constructor(props){
+    super(props)
 
-function Greeting(props){
-  return <h1>Halo {props.name} - <Biodata age={props.age} /></h1>
+    this.state = {
+      time: props.start
+    }
+  }
+
+  // lifecycle
+  componentDidMount(){
+    this.addInterval = setInterval(() => this.increase(), 1000)
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.addInterval)
+  }
+
+  increase(){
+    // update state time setiap 1 detik
+    this.setState((state, props) => ({
+      time: parseInt(state.time) + 1
+    }));
+  }
+
+  render(){
+    return (
+      <div>{this.state.time} detik</div>
+    );
+  }
 }
 
 class App extends Component{
@@ -38,8 +62,7 @@ class App extends Component{
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <Greeting name="Hamdan" age="25"/>
-          <Greeting name="Abyadi" age="18"/>
+          <Timer start="0"/>
         </header>
       </div>
     );
