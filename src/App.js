@@ -25,25 +25,40 @@ import './App.css';
 
 // event handler
 
-function Clicker(){
-  function handleClick(e){
-    alert('berhasil click')
-    e.preventDefault();
+class Toggle extends Component{
+  constructor(props){
+    super(props)
+
+    this.state = {
+      toggleStatus: true
+    }
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
-  return (
-    <a href="#" onClick={handleClick}>Klik disini!</a>
-  )
+  handleClick(){
+    this.setState(state => ({
+      toggleStatus: !state.toggleStatus
+    }));
+  }
+
+  render(){
+    return (
+      <button onClick={this.handleClick}>
+        {this.state.toggleStatus ? 'ON' : 'OFF'}
+      </button>
+    )
+  }
 }
 
 class App extends Component{
   render(){
     return (
       <div className="App">
+        <Toggle />
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
         </header>
-        <Clicker />
       </div>
     );
   }
