@@ -23,37 +23,17 @@ import './App.css';
 //   );
 // }
 
-// State
-class Timer extends Component{
-  constructor(props){
-    super(props)
+// event handler
 
-    this.state = {
-      time: props.start
-    }
+function Clicker(){
+  function handleClick(e){
+    alert('berhasil click')
+    e.preventDefault();
   }
 
-  // lifecycle
-  componentDidMount(){
-    this.addInterval = setInterval(() => this.increase(), 1000)
-  }
-
-  componentWillUnmount(){
-    clearInterval(this.addInterval)
-  }
-
-  increase(){
-    // update state time setiap 1 detik
-    this.setState((state, props) => ({
-      time: parseInt(state.time) + 1
-    }));
-  }
-
-  render(){
-    return (
-      <div>{this.state.time} detik</div>
-    );
-  }
+  return (
+    <a href="#" onClick={handleClick}>Klik disini!</a>
+  )
 }
 
 class App extends Component{
@@ -62,8 +42,8 @@ class App extends Component{
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <Timer start="0"/>
         </header>
+        <Clicker />
       </div>
     );
   }
